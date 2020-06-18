@@ -50,7 +50,11 @@
     <PackageReference Include="HarmonyCore.CodeDomProvider" Version="1.0.7" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BbqsController.dbl" />
+    <Compile Include="FavoritesController.dbl" />
     <Compile Include="IsolatedMethodsBase.dbl" />
+    <Compile Include="OrdersController.dbl" />
+    <Compile Include="UsersController.dbl" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Repository\Repository.synproj">

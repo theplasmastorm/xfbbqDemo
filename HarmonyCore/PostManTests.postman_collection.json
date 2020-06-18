@@ -1,0 +1,289 @@
+{
+    "info": {
+        "_postman_id": "b2a112df-6cd0-4ce7-a9c3-431ded391423",
+        "name": "Harmony Core Sample API",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "_postman_id": "c74c627e-6b7b-456c-9e15-5466a69dd19d",
+            "name": "Bbq Tests",
+            "item": [
+                {
+                    "_postman_id": "96406135-541d-49b1-94d3-407d276dea52",
+                    "name": "Read bbqs",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": ""
+                        },
+                        "url": {
+                            "raw": "{{ServerBaseUri}}/Bbqs",
+                            "host": [
+                                "{{ServerBaseUri}}"
+                            ],
+                            "path": [
+                                "Bbqs"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+                ,
+                {
+                    "_postman_id": "d3ad2703-828f-42b6-870f-4b631cba798d",
+                    "name": "Read bbq",
+                    "request": {
+                    "method": "GET",
+                    "header": [
+                        {
+                        "key": "Accept",
+                        "value": "application/json"
+                        }
+                    ],
+                    "body": {
+                        "mode": "raw",
+                        "raw": ""
+                    },
+                    "url": {
+                        "raw": "{{ServerBaseUri}}/Bbqs(Id=123)",
+                        "host": [
+                            "{{ServerBaseUri}}"
+                        ],
+                        "path": [
+                            "Bbqs(Id=123)"
+                        ]
+                    }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "_postman_id": "4816258f-0aee-454e-ae45-b1ca9e9c9799",
+            "name": "Order Tests",
+            "item": [
+                {
+                    "_postman_id": "7a96a8b5-bfe1-49d9-80fd-f2ef7bbed884",
+                    "name": "Read orders",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": ""
+                        },
+                        "url": {
+                            "raw": "{{ServerBaseUri}}/Orders",
+                            "host": [
+                                "{{ServerBaseUri}}"
+                            ],
+                            "path": [
+                                "Orders"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+                ,
+                {
+                    "_postman_id": "d6d735e7-c1f3-4682-b34d-b5f775dbc238",
+                    "name": "Read order",
+                    "request": {
+                    "method": "GET",
+                    "header": [
+                        {
+                        "key": "Accept",
+                        "value": "application/json"
+                        }
+                    ],
+                    "body": {
+                        "mode": "raw",
+                        "raw": ""
+                    },
+                    "url": {
+                        "raw": "{{ServerBaseUri}}/Orders(Id=123)",
+                        "host": [
+                            "{{ServerBaseUri}}"
+                        ],
+                        "path": [
+                            "Orders(Id=123)"
+                        ]
+                    }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "_postman_id": "633964b2-5325-44cd-8a07-e37fef8be28d",
+            "name": "User Tests",
+            "item": [
+                {
+                    "_postman_id": "ced066d0-e8f9-468c-9897-d55316756458",
+                    "name": "Read users",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": ""
+                        },
+                        "url": {
+                            "raw": "{{ServerBaseUri}}/Users",
+                            "host": [
+                                "{{ServerBaseUri}}"
+                            ],
+                            "path": [
+                                "Users"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+                ,
+                {
+                    "_postman_id": "a8571bdd-3959-42c0-9f70-1bf15bcd0178",
+                    "name": "Read user",
+                    "request": {
+                    "method": "GET",
+                    "header": [
+                        {
+                        "key": "Accept",
+                        "value": "application/json"
+                        }
+                    ],
+                    "body": {
+                        "mode": "raw",
+                        "raw": ""
+                    },
+                    "url": {
+                        "raw": "{{ServerBaseUri}}/Users(Id=123)",
+                        "host": [
+                            "{{ServerBaseUri}}"
+                        ],
+                        "path": [
+                            "Users(Id=123)"
+                        ]
+                    }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "_postman_id": "749b4e7b-48f3-4a5b-862f-d05cb9579368",
+            "name": "Favorite Tests",
+            "item": [
+                {
+                    "_postman_id": "e0ea027f-bae9-4700-a487-92cf26dc1f5a",
+                    "name": "Read favorites",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": ""
+                        },
+                        "url": {
+                            "raw": "{{ServerBaseUri}}/Favorites",
+                            "host": [
+                                "{{ServerBaseUri}}"
+                            ],
+                            "path": [
+                                "Favorites"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+                ,
+                {
+                    "_postman_id": "650d574e-74af-4d4a-b580-d66e7db4b125",
+                    "name": "Read favorite",
+                    "request": {
+                    "method": "GET",
+                    "header": [
+                        {
+                        "key": "Accept",
+                        "value": "application/json"
+                        }
+                    ],
+                    "body": {
+                        "mode": "raw",
+                        "raw": ""
+                    },
+                    "url": {
+                        "raw": "{{ServerBaseUri}}/Favorites(Id=123)",
+                        "host": [
+                            "{{ServerBaseUri}}"
+                        ],
+                        "path": [
+                            "Favorites(Id=123)"
+                        ]
+                    }
+                    },
+                    "response": []
+                }
+            ]
+        }
+    ],
+    "event": [
+        {
+            "listen": "prerequest",
+            "script": {
+                "id": "3b8813e5-3fc5-4adf-ac35-9785011bbdad",
+                "type": "text/javascript",
+                "exec": [
+                    ""
+                ]
+            }
+        },
+        {
+            "listen": "test",
+            "script": {
+                "id": "0b17e492-5b44-4c65-a84d-66fd53d81be7",
+                "type": "text/javascript",
+                "exec": [
+                    ""
+                ]
+            }
+        }
+    ],
+    "variable": [
+        {
+            "id": "bd6f096f-5211-4e1d-ba95-e944e7e7b89a",
+            "key": "AccessToken",
+            "value": "",
+            "type": "string"
+        },
+        {
+            "id": "516455e6-1f03-436c-83a5-2d1fb2499807",
+            "key": "ServerBaseUri",
+            "value": "https://localhost:8086/odata/v1",
+            "type": "string"
+        }
+    ]
+}

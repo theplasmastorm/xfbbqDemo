@@ -28,7 +28,7 @@ set TraditionalBridgeProject=TraditionalBridge
 rem ================================================================================================================================
 rem Specify the names of the repository structures to generate code from:
 
-set DATA_STRUCTURES=
+set DATA_STRUCTURES=BBQ ORDER USER FAVORITE
 set DATA_ALIASES=%DATA_STRUCTURES%
 set DATA_FILES=%DATA_STRUCTURES%
 
@@ -85,13 +85,13 @@ rem BRIDGE_ALIASES      Optional aliases for the structures listed in BRIDGE_STR
 rem ================================================================================================================================
 rem Comment or uncomment the following lines to enable or disable optional features:
 
-rem set ENABLE_ODATA_ENVIRONMENT=YES
-rem set ENABLE_SELF_HOST_GENERATION=YES
-rem set ENABLE_CREATE_TEST_FILES=-define ENABLE_CREATE_TEST_FILES
+set ENABLE_ODATA_ENVIRONMENT=YES
+set ENABLE_SELF_HOST_GENERATION=YES
+set ENABLE_CREATE_TEST_FILES=-define ENABLE_CREATE_TEST_FILES
 rem set DO_NOT_SET_FILE_LOGICALS=-define DO_NOT_SET_FILE_LOGICALS
-rem set ENABLE_GET_ALL=-define ENABLE_GET_ALL
-rem set ENABLE_GET_ONE=-define ENABLE_GET_ONE
-rem set ENABLE_POSTMAN_TESTS=YES
+set ENABLE_GET_ALL=-define ENABLE_GET_ALL
+set ENABLE_GET_ONE=-define ENABLE_GET_ONE
+set ENABLE_POSTMAN_TESTS=YES
 rem set ENABLE_ALTERNATE_KEYS=-define ENABLE_ALTERNATE_KEYS
 rem set ENABLE_COUNT=-define ENABLE_COUNT
 rem set ENABLE_PROPERTY_ENDPOINTS=-define ENABLE_PROPERTY_ENDPOINTS

@@ -69,6 +69,10 @@
       <SubType>Content</SubType>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="SelfHost.dbl" />
+    <Compile Include="SelfHostEnvironment.dbl" />
+  </ItemGroup>
   <Target Name="CreateLogsFolder" AfterTargets="Publish">
     <MakeDir Directories="$(PublishDir)logs" Condition="!Exists('$(PublishDir)logs')" />
   </Target>

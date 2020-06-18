@@ -169,4 +169,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="EdmBuilder.dbl" />
+    <Compile Include="Startup.dbl" />
+  </ItemGroup>
 </Project>
