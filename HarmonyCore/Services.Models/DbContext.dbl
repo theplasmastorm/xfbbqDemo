@@ -80,6 +80,57 @@ namespace Services.Models
 
 .endregion
 
+.region "Entity Relationships"
+
+            ;;--------------------------------------
+            ;; Relationships from BBQ
+
+            ;; BBQ.ID (one) --> (many) --> (one) ORDER.BBQID
+            ;;    Type          : D
+            ;;    From segments : ID(D8) 
+            ;;    To segments   : BBQID(D8) 
+
+            parm.AddOneToManyToOneRelation<Bbq, Order>("REL_Orders", "KEY_ID", "REL_Bbq", "KEY_BBQID")
+            ;;--------------------------------------
+            ;; Relationships from ORDER
+
+             ;; ORDER.USERID (many) --> (one) --> (many) USER.ID
+             ;;    Type          : A
+             ;;    From segments : USERID(D8) 
+             ;;    To segments   : ID(D8) 
+
+             parm.AddOneToOneToManyRelation<Order, User>("REL_User", "KEY_USERID", "REL_Orders", "KEY_ID")
+             ;; ORDER.BBQID (many) --> (one) --> (many) BBQ.ID
+             ;;    Type          : A
+             ;;    From segments : BBQID(D8) 
+             ;;    To segments   : ID(D8) 
+
+             parm.AddOneToOneToManyRelation<Order, Bbq>("REL_Bbq", "KEY_BBQID", "REL_Orders", "KEY_ID")
+            ;;--------------------------------------
+            ;; Relationships from USER
+
+            ;; USER.ID (one) --> (many) --> (one) FAVORITE.USERID
+            ;;    Type          : D
+            ;;    From segments : ID(D8) 
+            ;;    To segments   : USERID(D8) 
+
+            parm.AddOneToManyToOneRelation<User, Favorite>("REL_Favorites", "KEY_ID", "REL_User", "KEY_USERID")
+            ;; USER.ID (one) --> (many) --> (one) ORDER.USERID
+            ;;    Type          : D
+            ;;    From segments : ID(D8) 
+            ;;    To segments   : USERID(D8) 
+
+            parm.AddOneToManyToOneRelation<User, Order>("REL_Orders", "KEY_ID", "REL_User", "KEY_USERID")
+            ;;--------------------------------------
+            ;; Relationships from FAVORITE
+
+             ;; FAVORITE.USERID (many) --> (one) --> (many) USER.ID
+             ;;    Type          : A
+             ;;    From segments : USERID(D8) 
+             ;;    To segments   : ID(D8) 
+
+             parm.AddOneToOneToManyRelation<Favorite, User>("REL_User", "KEY_USERID", "REL_Favorites", "KEY_ID")
+.endregion
 
             parent.OnModelCreating(parm)
 

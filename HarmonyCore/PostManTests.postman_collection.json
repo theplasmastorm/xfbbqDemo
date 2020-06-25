@@ -1,16 +1,16 @@
 {
     "info": {
-        "_postman_id": "b2a112df-6cd0-4ce7-a9c3-431ded391423",
+        "_postman_id": "f837ea5f-08c8-43cb-8f5c-15c32c3376a4",
         "name": "Harmony Core Sample API",
         "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
     "item": [
         {
-            "_postman_id": "c74c627e-6b7b-456c-9e15-5466a69dd19d",
+            "_postman_id": "ea68d5f3-1966-4e1d-92cc-63f490d6802a",
             "name": "Bbq Tests",
             "item": [
                 {
-                    "_postman_id": "96406135-541d-49b1-94d3-407d276dea52",
+                    "_postman_id": "416bb399-55b4-4479-bdb2-0ecd30378cbe",
                     "name": "Read bbqs",
                     "request": {
                         "method": "GET",
@@ -38,7 +38,36 @@
                 }
                 ,
                 {
-                    "_postman_id": "d3ad2703-828f-42b6-870f-4b631cba798d",
+                    "_postman_id": "edd47cc2-9eec-45c3-b4da-f258a49f265c",
+                    "name": "Count bbqs",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": ""
+                        },
+                        "url": {
+                            "raw": "{{ServerBaseUri}}/Bbqs/$count",
+                            "host": [
+                                "{{ServerBaseUri}}"
+                            ],
+                            "path": [
+                                "Bbqs",
+                                "$count"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+                ,
+                {
+                    "_postman_id": "e3b5cda5-8a0d-4829-ab7f-fa7deb94c7cd",
                     "name": "Read bbq",
                     "request": {
                     "method": "GET",
@@ -64,14 +93,97 @@
                     },
                     "response": []
                 }
+                ,
+                {
+                    "_postman_id": "0c45000d-799c-482a-b442-352e1194beea",
+                    "name": "Create bbq (auto assign key)",
+                    "request": {
+                    "method": "POST",
+                    "header": [
+                        {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                        }
+                    ],
+                    "body": {
+                        "mode": "raw",
+                         "raw": "{\n    \"Id\": 123,\n    \"Creationdate\": 123,\n    \"Helddate\": 123\n}"
+                    },
+                    "url": {
+                        "raw": "{{ServerBaseUri}}/Bbqs",
+                        "host": [
+                            "{{ServerBaseUri}}"
+                        ],
+                        "path": [
+                            "Bbqs"
+                        ]
+                    }
+                    },
+                    "response": []
+                }
+                ,
+                {
+                    "_postman_id": "5e366b03-4b10-4a7a-af61-f97401424e1a",
+                    "name": "Create or update bbq",
+                    "request": {
+                    "method": "PUT",
+                    "header": [
+                        {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                        }
+                    ],
+                    "body": {
+                        "mode": "raw",
+                         "raw": "{\n    \"Id\": 123,\n    \"Creationdate\": 123,\n    \"Helddate\": 123\n}"
+                    },
+                    "url": {
+                        "raw": "{{ServerBaseUri}}/Bbqs(Id=123)",
+                        "host": [
+                            "{{ServerBaseUri}}"
+                        ],
+                        "path": [
+                            "Bbqs(Id=123)"
+                        ]
+                    }
+                    },
+                    "response": []
+                }
+              ,
+                {
+                    "name": "Patch bbq",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[\r\n  {\r\n    \"op\": \"replace\",\r\n    \"path\": \"PropertyName\",\r\n    \"value\": \"PropertyValue\"\r\n  }\r\n]"
+                        },
+                    "url": {
+                        "raw": "/Bbqs(Id=123)",
+                        "host": [
+                            "{{ServerBaseUri}}"
+                        ],
+                        "path": [
+                            "Bbqs(Id=123)"
+                        ]
+                    }
+                    },
+                    "response": []
+                }
             ]
         },
         {
-            "_postman_id": "4816258f-0aee-454e-ae45-b1ca9e9c9799",
+            "_postman_id": "68458530-e97d-4f2a-b834-023b31c02142",
             "name": "Order Tests",
             "item": [
                 {
-                    "_postman_id": "7a96a8b5-bfe1-49d9-80fd-f2ef7bbed884",
+                    "_postman_id": "c38e077b-87c7-4ecb-8885-a84436e5aef6",
                     "name": "Read orders",
                     "request": {
                         "method": "GET",
@@ -99,7 +211,36 @@
                 }
                 ,
                 {
-                    "_postman_id": "d6d735e7-c1f3-4682-b34d-b5f775dbc238",
+                    "_postman_id": "6e571c26-632f-491c-88b1-51137d0903d5",
+                    "name": "Count orders",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": ""
+                        },
+                        "url": {
+                            "raw": "{{ServerBaseUri}}/Orders/$count",
+                            "host": [
+                                "{{ServerBaseUri}}"
+                            ],
+                            "path": [
+                                "Orders",
+                                "$count"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+                ,
+                {
+                    "_postman_id": "046bd534-9e13-43d7-9975-71b360a759e0",
                     "name": "Read order",
                     "request": {
                     "method": "GET",
@@ -125,14 +266,211 @@
                     },
                     "response": []
                 }
+                ,
+                {
+                    "_postman_id": "21c7cdce-7f2a-4917-acd6-af23c218fb32",
+                    "name": "Read orders by Userid",
+                    "request": {
+                    "method": "GET",
+                    "header": [
+                        {
+                        "key": "Accept",
+                        "value": "application/json"
+                        }
+                    ],
+                    "body": {
+                        "mode": "raw",
+                        "raw": ""
+                    },
+                    "url": {
+                        "raw": "{{ServerBaseUri}}/Orders(Userid=123)",
+                        "host": [
+                            "{{ServerBaseUri}}"
+                        ],
+                        "path": [
+                            "Orders(Userid=123)"
+                        ]
+                    }
+                    },
+                    "response": []
+                }
+                ,
+                {
+                    "_postman_id": "4a246387-f036-406a-8fa6-e78f68836ebf",
+                    "name": "Count orders by Userid",
+                    "request": {
+                    "method": "GET",
+                    "header": [
+                        {
+                        "key": "Accept",
+                        "value": "application/json"
+                        }
+                    ],
+                    "body": {
+                        "mode": "raw",
+                        "raw": ""
+                    },
+                    "url": {
+                        "raw": "{{ServerBaseUri}}/Orders(Userid=123)/$count",
+                        "host": [
+                            "{{ServerBaseUri}}"
+                        ],
+                        "path": [
+                            "Orders(Userid=123)",
+                            "$count"
+                        ]
+                    }
+                    },
+                    "response": []
+                }
+                ,
+                {
+                    "_postman_id": "f105cc61-fea7-4f2b-b9f9-c404f73fa21e",
+                    "name": "Read orders by Bbqid",
+                    "request": {
+                    "method": "GET",
+                    "header": [
+                        {
+                        "key": "Accept",
+                        "value": "application/json"
+                        }
+                    ],
+                    "body": {
+                        "mode": "raw",
+                        "raw": ""
+                    },
+                    "url": {
+                        "raw": "{{ServerBaseUri}}/Orders(Bbqid=123)",
+                        "host": [
+                            "{{ServerBaseUri}}"
+                        ],
+                        "path": [
+                            "Orders(Bbqid=123)"
+                        ]
+                    }
+                    },
+                    "response": []
+                }
+                ,
+                {
+                    "_postman_id": "9938177c-e792-4b0d-833f-4e07c1e77e34",
+                    "name": "Count orders by Bbqid",
+                    "request": {
+                    "method": "GET",
+                    "header": [
+                        {
+                        "key": "Accept",
+                        "value": "application/json"
+                        }
+                    ],
+                    "body": {
+                        "mode": "raw",
+                        "raw": ""
+                    },
+                    "url": {
+                        "raw": "{{ServerBaseUri}}/Orders(Bbqid=123)/$count",
+                        "host": [
+                            "{{ServerBaseUri}}"
+                        ],
+                        "path": [
+                            "Orders(Bbqid=123)",
+                            "$count"
+                        ]
+                    }
+                    },
+                    "response": []
+                }
+                ,
+                {
+                    "_postman_id": "0f36ad78-6fab-41fb-b668-1d9ad0e8a450",
+                    "name": "Create or update order",
+                    "request": {
+                    "method": "PUT",
+                    "header": [
+                        {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                        }
+                    ],
+                    "body": {
+                        "mode": "raw",
+                         "raw": "{\n    \"Id\": 123,\n    \"Meat\": 123,\n    \"Cheese\": 123,\n    \"Doneness\": 123,\n    \"Spicy\": 123,\n    \"Type\": 123,\n    \"Count\": 123,\n    \"Burnt\": 123,\n    \"Orderdate\": 123,\n    \"Userid\": 123,\n    \"Bbqid\": 123\n}"
+                    },
+                    "url": {
+                        "raw": "{{ServerBaseUri}}/Orders(Id=123)",
+                        "host": [
+                            "{{ServerBaseUri}}"
+                        ],
+                        "path": [
+                            "Orders(Id=123)"
+                        ]
+                    }
+                    },
+                    "response": []
+                }
+              ,
+                {
+                    "name": "Patch order",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[\r\n  {\r\n    \"op\": \"replace\",\r\n    \"path\": \"PropertyName\",\r\n    \"value\": \"PropertyValue\"\r\n  }\r\n]"
+                        },
+                    "url": {
+                        "raw": "/Orders(Id=123)",
+                        "host": [
+                            "{{ServerBaseUri}}"
+                        ],
+                        "path": [
+                            "Orders(Id=123)"
+                        ]
+                    }
+                    },
+                    "response": []
+                }
+                ,
+                {
+                    "_postman_id": "8625760f-0efd-490c-a886-32083ce6e8c0",
+                    "name": "Delete order",
+                    "request": {
+                    "method": "DELETE",
+                    "header": [
+                        {
+                        "key": "Accept",
+                        "value": "application/json"
+                        }
+                    ],
+                    "body": {
+                        "mode": "raw",
+                        "raw": ""
+                    },
+                    "url": {
+                        "raw": "{{ServerBaseUri}}/Orders(Id=123)",
+                        "host": [
+                            "{{ServerBaseUri}}"
+                        ],
+                        "path": [
+                            "Orders(Id=123)"
+                        ]
+                    }
+                    },
+                    "response": []
+                }
             ]
         },
         {
-            "_postman_id": "633964b2-5325-44cd-8a07-e37fef8be28d",
+            "_postman_id": "cc77c723-bccc-44ef-a520-28deda3a1cf6",
             "name": "User Tests",
             "item": [
                 {
-                    "_postman_id": "ced066d0-e8f9-468c-9897-d55316756458",
+                    "_postman_id": "9aa4b8c1-6a40-4e7d-b737-e7b3f59596b6",
                     "name": "Read users",
                     "request": {
                         "method": "GET",
@@ -160,7 +498,36 @@
                 }
                 ,
                 {
-                    "_postman_id": "a8571bdd-3959-42c0-9f70-1bf15bcd0178",
+                    "_postman_id": "2dd95010-52a1-4217-8579-7b7eac3876fc",
+                    "name": "Count users",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": ""
+                        },
+                        "url": {
+                            "raw": "{{ServerBaseUri}}/Users/$count",
+                            "host": [
+                                "{{ServerBaseUri}}"
+                            ],
+                            "path": [
+                                "Users",
+                                "$count"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+                ,
+                {
+                    "_postman_id": "bbc5133a-550d-4587-8b93-9e02fde7cf87",
                     "name": "Read user",
                     "request": {
                     "method": "GET",
@@ -186,14 +553,69 @@
                     },
                     "response": []
                 }
+                ,
+                {
+                    "_postman_id": "ff6851c4-0422-4213-9fce-90955886fa9f",
+                    "name": "Create or update user",
+                    "request": {
+                    "method": "PUT",
+                    "header": [
+                        {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                        }
+                    ],
+                    "body": {
+                        "mode": "raw",
+                         "raw": "{\n    \"Id\": 123,\n    \"Joindate\": 123,\n    \"Type\": 123,\n    \"Email\": \"ABC\",\n    \"Lastlogindate\": 123,\n    \"Hash\": \"ABC\",\n    \"Name\": \"ABC\",\n    \"Recoverycode\": \"ABC\"\n}"
+                    },
+                    "url": {
+                        "raw": "{{ServerBaseUri}}/Users(Id=123)",
+                        "host": [
+                            "{{ServerBaseUri}}"
+                        ],
+                        "path": [
+                            "Users(Id=123)"
+                        ]
+                    }
+                    },
+                    "response": []
+                }
+              ,
+                {
+                    "name": "Patch user",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[\r\n  {\r\n    \"op\": \"replace\",\r\n    \"path\": \"PropertyName\",\r\n    \"value\": \"PropertyValue\"\r\n  }\r\n]"
+                        },
+                    "url": {
+                        "raw": "/Users(Id=123)",
+                        "host": [
+                            "{{ServerBaseUri}}"
+                        ],
+                        "path": [
+                            "Users(Id=123)"
+                        ]
+                    }
+                    },
+                    "response": []
+                }
             ]
         },
         {
-            "_postman_id": "749b4e7b-48f3-4a5b-862f-d05cb9579368",
+            "_postman_id": "4713da75-5952-4c34-8a4d-01286d273427",
             "name": "Favorite Tests",
             "item": [
                 {
-                    "_postman_id": "e0ea027f-bae9-4700-a487-92cf26dc1f5a",
+                    "_postman_id": "98de6dca-906e-4e41-ad24-283e9f6c3b89",
                     "name": "Read favorites",
                     "request": {
                         "method": "GET",
@@ -221,10 +643,179 @@
                 }
                 ,
                 {
-                    "_postman_id": "650d574e-74af-4d4a-b580-d66e7db4b125",
+                    "_postman_id": "719bdd38-174a-4caf-8e51-6bc136467ba4",
+                    "name": "Count favorites",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": ""
+                        },
+                        "url": {
+                            "raw": "{{ServerBaseUri}}/Favorites/$count",
+                            "host": [
+                                "{{ServerBaseUri}}"
+                            ],
+                            "path": [
+                                "Favorites",
+                                "$count"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+                ,
+                {
+                    "_postman_id": "df4dc658-8f43-4fa8-b481-aa556a917980",
                     "name": "Read favorite",
                     "request": {
                     "method": "GET",
+                    "header": [
+                        {
+                        "key": "Accept",
+                        "value": "application/json"
+                        }
+                    ],
+                    "body": {
+                        "mode": "raw",
+                        "raw": ""
+                    },
+                    "url": {
+                        "raw": "{{ServerBaseUri}}/Favorites(Id=123)",
+                        "host": [
+                            "{{ServerBaseUri}}"
+                        ],
+                        "path": [
+                            "Favorites(Id=123)"
+                        ]
+                    }
+                    },
+                    "response": []
+                }
+                ,
+                {
+                    "_postman_id": "185b99c0-5be9-4fb9-a769-5db23634c509",
+                    "name": "Read favorites by Userid",
+                    "request": {
+                    "method": "GET",
+                    "header": [
+                        {
+                        "key": "Accept",
+                        "value": "application/json"
+                        }
+                    ],
+                    "body": {
+                        "mode": "raw",
+                        "raw": ""
+                    },
+                    "url": {
+                        "raw": "{{ServerBaseUri}}/Favorites(Userid=123)",
+                        "host": [
+                            "{{ServerBaseUri}}"
+                        ],
+                        "path": [
+                            "Favorites(Userid=123)"
+                        ]
+                    }
+                    },
+                    "response": []
+                }
+                ,
+                {
+                    "_postman_id": "992322d7-ed18-41b4-90b1-4ac5d1bc13e2",
+                    "name": "Count favorites by Userid",
+                    "request": {
+                    "method": "GET",
+                    "header": [
+                        {
+                        "key": "Accept",
+                        "value": "application/json"
+                        }
+                    ],
+                    "body": {
+                        "mode": "raw",
+                        "raw": ""
+                    },
+                    "url": {
+                        "raw": "{{ServerBaseUri}}/Favorites(Userid=123)/$count",
+                        "host": [
+                            "{{ServerBaseUri}}"
+                        ],
+                        "path": [
+                            "Favorites(Userid=123)",
+                            "$count"
+                        ]
+                    }
+                    },
+                    "response": []
+                }
+                ,
+                {
+                    "_postman_id": "73ec7387-4a9d-4c57-a43b-f4380f954676",
+                    "name": "Create or update favorite",
+                    "request": {
+                    "method": "PUT",
+                    "header": [
+                        {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                        }
+                    ],
+                    "body": {
+                        "mode": "raw",
+                         "raw": "{\n    \"Id\": 123,\n    \"Meat\": 123,\n    \"Cheese\": 123,\n    \"Doneness\": 123,\n    \"Spicy\": 123,\n    \"Type\": 123,\n    \"Count\": 123,\n    \"Burnt\": 123,\n    \"Userid\": 123\n}"
+                    },
+                    "url": {
+                        "raw": "{{ServerBaseUri}}/Favorites(Id=123)",
+                        "host": [
+                            "{{ServerBaseUri}}"
+                        ],
+                        "path": [
+                            "Favorites(Id=123)"
+                        ]
+                    }
+                    },
+                    "response": []
+                }
+              ,
+                {
+                    "name": "Patch favorite",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[\r\n  {\r\n    \"op\": \"replace\",\r\n    \"path\": \"PropertyName\",\r\n    \"value\": \"PropertyValue\"\r\n  }\r\n]"
+                        },
+                    "url": {
+                        "raw": "/Favorites(Id=123)",
+                        "host": [
+                            "{{ServerBaseUri}}"
+                        ],
+                        "path": [
+                            "Favorites(Id=123)"
+                        ]
+                    }
+                    },
+                    "response": []
+                }
+                ,
+                {
+                    "_postman_id": "97e1951f-dacc-4b9a-89a4-badea3c6c380",
+                    "name": "Delete favorite",
+                    "request": {
+                    "method": "DELETE",
                     "header": [
                         {
                         "key": "Accept",
@@ -254,7 +845,7 @@
         {
             "listen": "prerequest",
             "script": {
-                "id": "3b8813e5-3fc5-4adf-ac35-9785011bbdad",
+                "id": "0708cdde-3cb3-4d06-b100-43f866d0b400",
                 "type": "text/javascript",
                 "exec": [
                     ""
@@ -264,7 +855,7 @@
         {
             "listen": "test",
             "script": {
-                "id": "0b17e492-5b44-4c65-a84d-66fd53d81be7",
+                "id": "7cc76ea5-5125-479a-8639-707c739eaf3f",
                 "type": "text/javascript",
                 "exec": [
                     ""

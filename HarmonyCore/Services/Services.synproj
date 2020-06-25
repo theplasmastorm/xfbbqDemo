@@ -171,6 +171,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EdmBuilder.dbl" />
+    <Compile Include="PrimaryKeyGenerator.dbl" />
+    <Compile Include="Startup.Custom.dbl" />
     <Compile Include="Startup.dbl" />
   </ItemGroup>
 </Project>

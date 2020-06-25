@@ -1,0 +1,104 @@
+;;*****************************************************************************
+;;
+;; Title:       PrimaryKeyGenerator.dbl
+;;
+;; Description: Provides primary key values for create (POST) operations.
+;;
+;;*****************************************************************************
+;; THIS CODE WAS HAND CRAFTED AND IS AN EXAMPLE ONLY. IN THE SAMPLE ENVIRONMENT
+;; PRIMARY KEYS FOR NEW "POST"ED RECORDS ARE ASSIGNED BY THE CODE IN THIS CLASS.
+;; WE USE A RELATIVE FILE NAMED SYSPARAMS.DDF TO STORE THE NEXT AVAILABLE KEY
+;; VALUES FOR EACH OF THE FILES IN THE SAMPLE ENVIRONMENT. CODE HERE ALLOCATES
+;; KEY VALUES TO NEW RECORDS AND INCREMENTS THE VALUES IN THE RELATIVE FILE.
+;; YOUR REQUIREMENTS MAY BE DIFFERENT, BUT ESSENTIALLY EACH TIME THE METHOD
+;; IncrementKeyImplementation IS CALLED IT MUST RETURN THE PRIMARY KEY FOR
+;; THE PARTICULAR RECORD TYPE.
+;;*****************************************************************************
+
+import System
+import System.Collections.Generic
+import System.Text
+import Harmony.Core
+import Harmony.Core.FileIO
+
+namespace Services
+
+	.include "SYSPARAMS" repository, structure="strSysParams", end
+
+	public class PrimaryKeyGenerator extends RecordPrimaryKeyFactory
+
+		mFileChannelManager, @IFileChannelManager
+		mChannel, int
+
+		nextBBQ, strSysParams
+		nextOrder, strSysParams
+		nextUser, strSysParams
+		nextFavorite, strSysParams
+
+		lockObj, @Object, new Object()
+
+		public method PrimaryKeyGenerator
+			required in aFileChannelManager, @IFileChannelManager
+		proc
+			mFileChannelManager = aFileChannelManager
+			mChannel = mFileChannelManager.GetChannel("DAT:sysparams.ddf",FileOpenMode.UpdateRelative)
+			init nextBBQ
+			init nextOrder
+			init nextUser
+			init nextFavorite
+		endmethod
+
+		protected override method IncrementKeyImplementation, @a
+			metaDatainstance, @DataObjectMetadataBase
+		proc
+			using metaDatainstance.RPSStructureName select
+			("BBQ"),
+			begin
+				if (!nextBBQ.param_value)
+					read(mChannel,nextBBQ,1,LOCK:Q_MANUAL_LOCK, wait:1)
+				nextBBQ.param_value += 1
+				write(mChannel,nextBBQ,1)
+				mreturn (@a)%string(nextBBQ.param_value-1)
+			end
+			("ORDER"),
+			begin
+				if (!nextOrder.param_value)
+					read(mChannel,nextOrder,2,LOCK:Q_MANUAL_LOCK, wait:1)
+				nextOrder.param_value += 1
+				write(mChannel,nextOrder,2)
+				mreturn (@a)%string(nextOrder.param_value-1)
+			end
+			("USER"),
+			begin
+				if (!nextUser.param_value)
+					read(mChannel,nextUser,3,LOCK:Q_MANUAL_LOCK, wait:1)
+				nextUser.param_value += 1
+				write(mChannel,nextUser,3)
+				mreturn (@a)%string(nextUser.param_value-1)
+			end
+			("FAVORITE"),
+			begin
+				if (!nextFavorite.param_value)
+					read(mChannel,nextFavorite,4,LOCK:Q_MANUAL_LOCK, wait:1)
+				nextFavorite.param_value += 1
+				write(mChannel,nextFavorite,4)
+				mreturn (@a)%string(nextFavorite.param_value-1)
+			end
+			endusing
+		endmethod
+
+		protected override method CommitImplementation, void
+		proc
+			mFileChannelManager.ReturnChannel(mChannel)
+			mChannel = 0
+		endmethod
+
+		protected override method Abort, void
+		proc
+			mFileChannelManager.ReturnChannel(mChannel)
+			mChannel = 0
+		endmethod
+
+	endclass
+
+endnamespace

@@ -295,6 +295,44 @@ namespace Services.Models
 
 .endregion
 
+.region "Relationships to other entities"
+
+        ;;; <summary>
+        ;;; Relationship (Type A)
+        ;;; ORDER.USERID (one) --> (one) --> (many) USER.ID
+        ;;; </summary>
+        public readwrite property REL_User, @User
+
+        ;;; <summary>
+        ;;; Relationship (Type A)
+        ;;; ORDER.BBQID (one) --> (one) --> (many) BBQ.ID
+        ;;; </summary>
+        public readwrite property REL_Bbq, @Bbq
+
+.endregion
+
+.region "Relation validation"
+
+        ;;; <summary>
+        ;;; Validate data
+        ;;; </summary>
+        ;;; <param name="type">Validation type (create, update or delete)</param>
+        ;;; <param name="sp">Serices provider</param>
+        public override method Validate, void
+            required in vType, ValidationType
+            required in sp, @IServiceProvider
+        proc
+            ;;If we have a ValidateCustom method, call it
+            ValidateCustom(vType,sp)
+        endmethod
+
+        private partial method ValidateCustom, void
+            required in vType, ValidationType
+            required in sp, @IServiceProvider
+        endmethod
+
+.endregion
+
 .region "Properties to represent keys"
 
         ;;Access keys

@@ -88,6 +88,162 @@ namespace Services.Controllers
             mreturn new SingleResult<Favorite>(_DbContext.Favorites.AsNoTracking().FindQuery<Favorite>(_DbContext, aId))
         endmethod
 
+        {ODataRoute("(Userid={aUserid})")}
+        {Produces("application/json")}
+        {ProducesResponseType(^typeof(ODataValue<IEnumerable<Favorite>>),StatusCodes.Status200OK)}
+        {ProducesResponseType(StatusCodes.Status404NotFound)}
+        {EnableQuery(MaxExpansionDepth=4)}
+        ;;; <summary>
+        ;;; Get favorites by alternate key key Userid.
+        ;;; </summary>
+        ;;; <param name="aUserid">ID of user who favored</param>
+        ;;; <returns>Returns an IActionResult indicating the status of the operation and containing any data that was returned.</returns>
+        public method GetFavoritesByUserid, @IActionResult
+            {FromODataUri}
+            required in aUserid, int
+        proc
+            data result = _DbContext.Favorites.AsNoTracking().FindAlternate("Userid",aUserid)
+            if (result == ^null)
+                mreturn NotFound()
+            mreturn Ok(result)
+        endmethod
+
+        {ODataRoute("(Id={aId})")}
+        {Produces("application/json")}
+        {ProducesResponseType(StatusCodes.Status201Created)}
+        {ProducesResponseType(StatusCodes.Status400BadRequest)}
+        {ProducesResponseType(StatusCodes.Status404NotFound)}
+        {HttpPut}
+        ;;; <summary>
+        ;;; Create (with a client-supplied primary key) or replace a favorite.
+        ;;; </summary>
+
+        ;;; <param name="aId">ID of favorite</param>
+        ;;; <returns>Returns an IActionResult indicating the status of the operation and containing any data that was returned.</returns>
+        public method PutFavorite, @IActionResult
+            {FromODataUri}
+            required in aId, int
+            {FromBody}
+            required in aFavorite, @Favorite
+        proc
+            ;; Validate inbound data
+            if (!ModelState.IsValid)
+                mreturn ValidationHelper.ReturnValidationError(ModelState)
+
+            ;;Ensure that the key values in the URI win over any data that may be in the model object
+            aFavorite.Id = aId
+
+            try
+            begin
+                ;;Add and commit
+                data existing = _DbContext.Favorites.Find(aId)
+                if(existing == ^null) then
+                begin
+                    _DbContext.Favorites.Add(aFavorite)
+                    _DbContext.SaveChanges()
+                    mreturn Created(aFavorite)
+                end
+                else
+                begin
+                    aFavorite.CopyTo(existing)
+                    _DbContext.SaveChanges()
+                    mreturn NoContent()
+                end
+            end
+            catch (e, @InvalidOperationException)
+            begin
+                mreturn BadRequest(e)
+            end
+            catch (e, @ValidationException)
+            begin
+                ModelState.AddModelError("RelationValidation",e.Message)
+                mreturn ValidationHelper.ReturnValidationError(ModelState)
+            end
+            endtry
+
+        endmethod
+        {ODataRoute("(Id={aId})")}
+        {Produces("application/json")}
+        {ProducesResponseType(StatusCodes.Status204NoContent)}
+        {ProducesResponseType(StatusCodes.Status400BadRequest)}
+        {ProducesResponseType(StatusCodes.Status404NotFound)}
+        {HttpPatch}
+        ;;; <summary>
+        ;;; Patch  (partial update) a favorite.
+        ;;; </summary>
+        ;;; <param name="aId">ID of favorite</param>
+        ;;; <returns>Returns an IActionResult indicating the status of the operation and containing any data that was returned.</returns>
+        public method PatchFavorite, @IActionResult
+            {FromODataUri}
+            required in aId, int
+            {FromBody}
+            required in aFavorite, @JsonPatchDocument<Favorite>
+        proc
+            ;; Validate inbound data
+            if (!ModelState.IsValid)
+                mreturn ValidationHelper.ReturnValidationError(ModelState)
+
+            ;;Patch the existing favorite
+            try
+            begin
+                ;;Get the favorite to be updated
+                data favoriteToUpdate = _DbContext.Favorites.Find(aId)
+                data patchError, @JsonPatchError, ^null
+                ;;Did we find it?
+                if(favoriteToUpdate == ^null)
+                    mreturn NotFound()
+
+                ;;Apply the changes to the favorite we read
+                aFavorite.ApplyTo(favoriteToUpdate, lambda(error) { patchError = error })
+                ;;if the patchdoc was bad return the error info
+                if(patchError != ^null)
+                    mreturn BadRequest(string.Format("Error applying patch document: error message {0}, caused by {1}", patchError.ErrorMessage, JsonConvert.SerializeObject(patchError.Operation)))
+
+                ;;Update and commit
+                _DbContext.Favorites.Update(favoriteToUpdate)
+                _DbContext.SaveChanges()
+            end
+            catch (e, @InvalidOperationException)
+            begin
+                mreturn BadRequest(e)
+            end
+            catch (e, @ValidationException)
+            begin
+                ModelState.AddModelError("RelationValidation",e.Message)
+                mreturn ValidationHelper.ReturnValidationError(ModelState)
+            end
+            endtry
+
+            mreturn NoContent()
+
+        endmethod
+        {ODataRoute("(Id={aId})")}
+        {ProducesResponseType(StatusCodes.Status204NoContent)}
+        {ProducesResponseType(StatusCodes.Status404NotFound)}
+        {HttpDelete}
+        ;;; <summary>
+        ;;; Delete a favorite.
+        ;;; </summary>
+        ;;; <param name="aId">ID of favorite</param>
+        ;;; <returns>Returns an IActionResult indicating the status of the operation and containing any data that was returned.</returns>
+        public method DeleteFavorite, @IActionResult
+            {FromODataUri}
+            required in aId, int
+        proc
+            ;;Get the favorite to be deleted
+            data favoriteToRemove = _DbContext.Favorites.Find(aId)
+
+            ;;Did we find it?
+            if (favoriteToRemove == ^null)
+                mreturn NotFound()
+
+            ;;Delete and commit
+            _DbContext.Favorites.Remove(favoriteToRemove)
+            _DbContext.SaveChanges()
+
+            mreturn NoContent()
+
+        endmethod
     endclass
 
 endnamespace

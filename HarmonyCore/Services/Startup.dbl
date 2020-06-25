@@ -401,6 +401,21 @@ namespace Services
                 ;;---------------------------------------------------
                 ;;Enable optional OData features
 
+                ;;Enable $select expressions to select properties returned
+                builder.Select()
+
+                ;;Enable $filter expressions to filter rows returned
+                builder.Filter()
+
+                ;;Enable $orderby expressions to custom sort results
+                builder.OrderBy()
+
+                ;;Enable /$count endpoints
+                builder.Count()
+
+                ;;Enable $expand expressions to expand relations
+                builder.Expand()
+
             end
 
             ;;-------------------------------------------------------

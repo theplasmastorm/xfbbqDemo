@@ -9,8 +9,13 @@ import BBQ from "./components/bbq/BBQ"
 import Favorite from "./components/favorite/Favorite";
 import Order from "./components/order/Order";
 import User from "./components/user/User";
+import UserRegistrationForm from "./components/user/UserRegistrationForm";
 
 import PageNotFound from "./PageNotFound";
+
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import UserLogin from "./components/user/UserLogin";
 
 export default function App() {
   return (
@@ -23,8 +28,11 @@ export default function App() {
         <Route path="/Favorite" component={Favorite} />
         <Route path="/Order" component={Order} />
         <Route path="/User" component={User} />
+        <Route path="/UserRegistrationForm" component={UserRegistrationForm} />
+        <Route path="/UserLogin" component={UserLogin} />
         <Route component={PageNotFound} />
       </Switch>
+      <ToastContainer hideProgressBar />
     </>
   );
 }

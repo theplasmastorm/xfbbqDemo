@@ -1,0 +1,74 @@
+import Microsoft.AspNetCore.Http
+import Microsoft.OData
+import Microsoft.AspNetCore.Authorization
+import Microsoft.AspNetCore.JsonPatch
+import Microsoft.AspNetCore.Mvc
+import Microsoft.AspNet.OData
+import Microsoft.AspNet.OData.Routing
+import Microsoft.EntityFrameworkCore
+import Microsoft.EntityFrameworkCore.Infrastructure
+import Microsoft.Extensions.Options
+import System.Collections.Generic
+import System.ComponentModel.DataAnnotations
+import Harmony.Core.EF.Extensions
+import Harmony.Core.Interface
+import Harmony.OData
+import Harmony.AspNetCore
+import Newtonsoft.Json
+import Services.Models
+import System.Linq
+import System.Net.Http
+import System.Net
+import System.Collections.Specialized
+import System.Text
+
+namespace Services.Controllers
+	class CaptchaReturn
+		public readwrite property success, boolean
+	endclass
+
+	public partial class UsersController extends ODataController
+		{AllowAnonymous}
+		{ODataRoute}
+		{Produces("application/json")}
+		{ProducesResponseType(^typeof(User),StatusCodes.Status200OK)}
+		{ProducesResponseType(StatusCodes.Status400BadRequest)}
+		;;; <summary>
+		;;; Create a new user (automatically assigned primary key).
+		;;; </summary>
+		;;; <returns>Returns an IActionResult indicating the status of the operation and containing any data that was returned.</returns>
+		public method PostUser, @IActionResult
+			{FromBody}
+			required in aUser, @User
+		proc
+			;;Remove the primary key fields from ModelState
+			ModelState.Remove("Id")
+
+			;; Add in registration date
+			aUser.Joindate = DateTimeOffset.UtcNow.ToUnixTimeSeconds()
+
+			;; Validate inbound data
+			if (!ModelState.IsValid)
+				mreturn ValidationHelper.ReturnValidationError(ModelState)
+
+			;;Get the next available primary key value
+			disposable data keyFactory = (@IPrimaryKeyFactory)_ServiceProvider.GetService(^typeof(IPrimaryKeyFactory))
+			KeyFactory.AssignPrimaryKey(aUser)
+
+			;;Add the new user
+			try
+			begin
+				_DbContext.Users.Add(aUser)
+				_DbContext.SaveChanges(keyFactory)
+			end
+                
+			catch (e, @ValidationException)
+			begin
+				ModelState.AddModelError("RelationValidation",e.Message)
+				mreturn ValidationHelper.ReturnValidationError(ModelState)
+			end
+			endtry
+			mreturn Created(aUser)
+		endmethod
+	endclass
+endnamespace

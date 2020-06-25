@@ -1,0 +1,27 @@
+import Harmony.AspNetCore
+import Harmony.AspNetCore.Context
+import Harmony.Core
+import Harmony.Core.Context
+import Harmony.Core.FileIO
+import Harmony.Core.Interface
+import Harmony.Core.Utility
+
+import Microsoft.Extensions.DependencyInjection
+
+namespace Services
+
+	public partial class Startup
+
+		partial method ConfigureServicesCustom, void
+			services, @IServiceCollection 
+		proc
+			;;-----------------------------------------------------------------
+			;; Add a custom "primary key generator" service
+
+			services.AddScoped<IPrimaryKeyFactory,PrimaryKeyGenerator>()
+
+		endmethod
+
+	endclass
+
+endnamespace

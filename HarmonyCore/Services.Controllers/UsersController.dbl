@@ -88,6 +88,115 @@ namespace Services.Controllers
             mreturn new SingleResult<User>(_DbContext.Users.AsNoTracking().FindQuery<User>(_DbContext, aId))
         endmethod
 
+        {ODataRoute("(Id={aId})")}
+        {Produces("application/json")}
+        {ProducesResponseType(StatusCodes.Status201Created)}
+        {ProducesResponseType(StatusCodes.Status400BadRequest)}
+        {ProducesResponseType(StatusCodes.Status404NotFound)}
+        {HttpPut}
+        ;;; <summary>
+        ;;; Create (with a client-supplied primary key) or replace a user.
+        ;;; </summary>
+
+        ;;; <param name="aId">ID of user</param>
+        ;;; <returns>Returns an IActionResult indicating the status of the operation and containing any data that was returned.</returns>
+        public method PutUser, @IActionResult
+            {FromODataUri}
+            required in aId, int
+            {FromBody}
+            required in aUser, @User
+        proc
+            ;; Validate inbound data
+            if (!ModelState.IsValid)
+                mreturn ValidationHelper.ReturnValidationError(ModelState)
+
+            ;;Ensure that the key values in the URI win over any data that may be in the model object
+            aUser.Id = aId
+
+            try
+            begin
+                ;;Add and commit
+                data existing = _DbContext.Users.Find(aId)
+                if(existing == ^null) then
+                begin
+                    _DbContext.Users.Add(aUser)
+                    _DbContext.SaveChanges()
+                    mreturn Created(aUser)
+                end
+                else
+                begin
+                    aUser.CopyTo(existing)
+                    _DbContext.SaveChanges()
+                    mreturn NoContent()
+                end
+            end
+            catch (e, @InvalidOperationException)
+            begin
+                mreturn BadRequest(e)
+            end
+            catch (e, @ValidationException)
+            begin
+                ModelState.AddModelError("RelationValidation",e.Message)
+                mreturn ValidationHelper.ReturnValidationError(ModelState)
+            end
+            endtry
+
+        endmethod
+        {ODataRoute("(Id={aId})")}
+        {Produces("application/json")}
+        {ProducesResponseType(StatusCodes.Status204NoContent)}
+        {ProducesResponseType(StatusCodes.Status400BadRequest)}
+        {ProducesResponseType(StatusCodes.Status404NotFound)}
+        {HttpPatch}
+        ;;; <summary>
+        ;;; Patch  (partial update) a user.
+        ;;; </summary>
+        ;;; <param name="aId">ID of user</param>
+        ;;; <returns>Returns an IActionResult indicating the status of the operation and containing any data that was returned.</returns>
+        public method PatchUser, @IActionResult
+            {FromODataUri}
+            required in aId, int
+            {FromBody}
+            required in aUser, @JsonPatchDocument<User>
+        proc
+            ;; Validate inbound data
+            if (!ModelState.IsValid)
+                mreturn ValidationHelper.ReturnValidationError(ModelState)
+
+            ;;Patch the existing user
+            try
+            begin
+                ;;Get the user to be updated
+                data userToUpdate = _DbContext.Users.Find(aId)
+                data patchError, @JsonPatchError, ^null
+                ;;Did we find it?
+                if(userToUpdate == ^null)
+                    mreturn NotFound()
+
+                ;;Apply the changes to the user we read
+                aUser.ApplyTo(userToUpdate, lambda(error) { patchError = error })
+                ;;if the patchdoc was bad return the error info
+                if(patchError != ^null)
+                    mreturn BadRequest(string.Format("Error applying patch document: error message {0}, caused by {1}", patchError.ErrorMessage, JsonConvert.SerializeObject(patchError.Operation)))
+
+                ;;Update and commit
+                _DbContext.Users.Update(userToUpdate)
+                _DbContext.SaveChanges()
+            end
+            catch (e, @InvalidOperationException)
+            begin
+                mreturn BadRequest(e)
+            end
+            catch (e, @ValidationException)
+            begin
+                ModelState.AddModelError("RelationValidation",e.Message)
+                mreturn ValidationHelper.ReturnValidationError(ModelState)
+            end
+            endtry
+
+            mreturn NoContent()
+
+        endmethod
     endclass
 
 endnamespace

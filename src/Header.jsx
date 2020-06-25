@@ -17,6 +17,10 @@ export default function Header() {
       {" | "}
       <NavLink to="/User">User</NavLink>
       {" | "}
+      <NavLink to="/UserRegistrationForm">User Registration Form</NavLink>
+      {" | "}
+      <NavLink to="/UserLogin">User Login</NavLink>
+      {" | "}
     </nav>
   );
 }
