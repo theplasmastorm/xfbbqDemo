@@ -2,12 +2,15 @@ import React from "react";
 import { Field, Form } from "react-final-form";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import * as userApi from "../../api/userApi";
+import { loginUser } from "../../redux/actions/loginActions";
 import * as bcrypt from "bcryptjs";
 import moment from "moment";
 
 export default function UserLogin() {
   const history = useHistory();
+  const dispatch = useDispatch();
 
   return (
     <Form
@@ -18,9 +21,16 @@ export default function UserLogin() {
             bcrypt.compare(
               values.Password,
               loggingInUser.Hash,
-              async (err, result) => {
+              (err, result) => {
                 if (result) {
-                  await userApi.saveUser({
+                  dispatch(
+                    loginUser({
+                      Id: loggingInUser.Id,
+                      Name: loggingInUser.Name,
+                      Type: loggingInUser.Type
+                    })
+                  );
+                  userApi.saveUser({
                     ...loggingInUser,
                     Lastlogindate: parseInt(moment().format("X"))
                   });
