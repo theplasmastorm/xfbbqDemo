@@ -9,3 +9,26 @@ export async function getBBQs() {
     return handleError(error);
   }
 }
+
+export async function deleteBBQ(bbqID) {
+  try {
+    let response = await fetch(`${baseUrl}/${bbqID}`, { method: "DELETE" });
+    return handleResponse(response);
+  } catch (error) {
+    return handleError(error);
+  }
+}
+
+export async function saveBBQ(bbq) {
+  try {
+    let response = await fetch(`${baseUrl}/${bbq.Id || ""}`, {
+      method: bbq.Id ? "PUT" : "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(bbq),
+    });
+
+    return handleResponse(response);
+  } catch (error) {
+    return handleError(error);
+  }
+}

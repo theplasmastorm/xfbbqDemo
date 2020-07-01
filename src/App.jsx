@@ -18,6 +18,7 @@ import UserLogout from "./components/user/UserLogout";
 
 import PageNotFound from "./PageNotFound";
 import NewOrderForm from "./components/user/NewOrderForm";
+import NewBBQForm from "./components/bbq/NewBBQForm";
 
 export default function App() {
   const login = useSelector((state) => state.login);
@@ -30,6 +31,7 @@ export default function App() {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/BBQ" component={BBQ} />
+          <Route path="/NewBBQForm" component={NewBBQForm} />
           <Route path="/Favorite" component={Favorite} />
           <Route path="/Order" component={Order} />
           <Route path="/NewOrderForm" component={NewOrderForm} />
@@ -45,6 +47,7 @@ export default function App() {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/BBQ" component={BBQ} />
+          <Route path="/NewBBQForm" component={NewBBQForm} />
           <Route path="/Favorite" component={Favorite} />
           <Route path="/Order" component={Order} />
           <Route path="/NewOrderForm" component={NewOrderForm} />

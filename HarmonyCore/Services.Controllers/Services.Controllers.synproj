@@ -50,6 +50,7 @@
     <PackageReference Include="HarmonyCore.CodeDomProvider" Version="1.0.7" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BbqsController.Custom.dbl" />
     <Compile Include="BbqsController.dbl" />
     <Compile Include="FavoritesController.Custom.dbl" />
     <Compile Include="FavoritesController.dbl" />

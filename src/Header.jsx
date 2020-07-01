@@ -15,6 +15,8 @@ export default function Header() {
         <>
           <NavLink to="/BBQ">BBQ</NavLink>
           {" | "}
+          <NavLink to="/NewBBQForm">New BBQ</NavLink>
+          {" | "}
         </>
       ) : (
         <></>
