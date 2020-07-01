@@ -170,6 +170,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EdmBuilder.Custom.dbl" />
     <Compile Include="EdmBuilder.dbl" />
     <Compile Include="PrimaryKeyGenerator.dbl" />
     <Compile Include="Startup.Custom.dbl" />

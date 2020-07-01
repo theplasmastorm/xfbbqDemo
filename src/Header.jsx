@@ -25,6 +25,8 @@ export default function Header() {
           {" | "}
           <NavLink to="/Order">Order</NavLink>
           {" | "}
+          <NavLink to="/NewOrderForm">New Order</NavLink>
+          {" | "}
         </>
       ) : (
         <></>

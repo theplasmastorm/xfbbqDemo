@@ -1,0 +1,36 @@
+import Harmony.Core
+import Harmony.Core.Context
+import Harmony.OData
+import Microsoft.EntityFrameworkCore
+import Microsoft.OData.Edm
+import Microsoft.AspNet.OData.Builder
+import Microsoft.AspNetCore.Mvc
+import Microsoft.AspNetCore.Mvc.Versioning.Conventions
+import System.Collections.Generic
+import Services.Models
+import Services.Controllers
+
+namespace Services
+	;;; <summary>
+	;;; Builds an entity framework entity data model.
+	;;; </summary>
+	public partial class EdmBuilder
+		partial static method GetEdmModelCustom, void
+			required in serviceProvider, @IServiceProvider
+			required in builder, @ODataModelBuilder
+		proc
+			data postOrderEntityTypeConfiguration, @EntityTypeConfiguration<Order>, builder.EntityType<Order>()
+			data postOrderEntityCollection, @EntityCollectionConfiguration<Order>, postOrderEntityTypeConfiguration.Collection
+			data postOrderAction, @ActionConfiguration, postOrderEntityCollection.Action("PostOrders")
+			postOrderAction.CollectionEntityParameter<Order>("Orders")
+			postOrderAction.ReturnsCollectionFromEntitySet<Order>("Orders")
+
+			data postFavoritesEntityTypeConfiguration, @EntityTypeConfiguration<Favorite>, builder.EntityType<Favorite>()
+			data postFavoritesEntityCollection, @EntityCollectionConfiguration<Favorite>, postFavoritesEntityTypeConfiguration.Collection
+			data postFavoritesAction, @ActionConfiguration, postFavoritesEntityCollection.Action("PostFavorites")
+			postFavoritesAction.CollectionEntityParameter<Favorite>("Favorites")
+			postFavoritesAction.ReturnsCollectionFromEntitySet<Favorite>("Favorites")
+		endmethod
+	endclass
+endnamespace
+

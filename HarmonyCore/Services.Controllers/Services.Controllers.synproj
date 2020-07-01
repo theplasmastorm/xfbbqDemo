@@ -51,8 +51,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BbqsController.dbl" />
+    <Compile Include="FavoritesController.Custom.dbl" />
     <Compile Include="FavoritesController.dbl" />
     <Compile Include="IsolatedMethodsBase.dbl" />
+    <Compile Include="OrdersController.Custom.dbl" />
     <Compile Include="OrdersController.dbl" />
     <Compile Include="UsersController.Custom.dbl" />
     <Compile Include="UsersController.dbl" />
