@@ -80,6 +80,50 @@ namespace Services.Controllers
                 mreturn BadRequest()
             end
             mreturn Created(aUser)
-        endmethod
+		endmethod
+
+		{ODataRoute("(Id={aId})")}
+		{ProducesResponseType(StatusCodes.Status204NoContent)}
+		{ProducesResponseType(StatusCodes.Status404NotFound)}
+		{HttpDelete}
+		;;; <summary>
+		;;; Delete a user.
+		;;; </summary>
+		;;; <param name="aId">ID of user</param>
+		;;; <returns>Returns an IActionResult indicating the status of the operation and containing any data that was returned.</returns>
+		public method DeleteUser, @IActionResult
+			{FromODataUri}
+			required in aId, int
+		proc
+			;;Get the user to be deleted
+			data userToRemove = _DbContext.Users.Find(aId)
+
+			;;Did we find it?
+			if (userToRemove == ^null)
+				mreturn NotFound()
+
+			;;Delete all their favorites
+			data favoritesByUser = _DbContext.Favorites.AsNoTracking().FindAlternate("Userid",aId)
+			data favorite, @Favorite
+			foreach favorite in favoritesByUser
+			begin
+				_DbContext.Favorites.Remove(favorite)
+			end
+
+			;;Delete all their orders
+			data ordersByUser = _DbContext.Orders.AsNoTracking().FindAlternate("Userid",aId)
+			data order, @Order
+			foreach order in ordersByUser
+			begin
+				_DbContext.Orders.Remove(order)
+			end
+
+			;;Delete and commit
+			_DbContext.Users.Remove(userToRemove)
+			_DbContext.SaveChanges()
+
+			mreturn NoContent()
+
+		endmethod
     endclass
 endnamespace

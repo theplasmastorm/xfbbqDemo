@@ -1,36 +1,47 @@
 import React, { useState } from "react";
 import { Field, Form } from "react-final-form";
 import * as bcrypt from "bcryptjs";
-import { useHistory } from "react-router-dom";
+import moment from "moment";
 import * as userApi from "../../api/userApi";
-
-import { toast } from "react-toastify";
-import { useSelector } from "react-redux";
 import ReCAPTCHA from "react-google-recaptcha";
+import { toast } from "react-toastify";
+import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-export default function UserRegistrationForm() {
+export default function UserRegistrationForm({ ...props }) {
   const history = useHistory();
   const login = useSelector((state) => state.login);
   const [captchaValue, setCaptchaValue] = useState(null);
+  const state = props?.location?.state;
 
   return (
     <Form
-    initialValues={{ Type: login.Type === 1 ? undefined : 3 }}
+      initialValues={
+        state
+          ? { Name: state.Name, Email: state.Email, Type: state.Type }
+          : { Type: login.Type === 1 ? undefined : 3 }
+      }
       onSubmit={(values) => {
         bcrypt.genSalt(13, (err, salt) => {
           bcrypt.hash(values.Password, salt, async (err, Hash) => {
             await userApi.saveUser(
               {
+                Id: state ? state.Id : undefined,
                 Name: values.Name,
                 Email: values.Email,
                 Type: values.Type,
+                Joindate: state
+                  ? state.Joindate
+                  : parseInt(moment().format("X")),
                 Hash,
               },
               captchaValue
             );
+            toast.success(
+              `${state ? "Edited" : "Added new user"} ${values.Name}`
+            );
+            history.push("/User");
           });
-          toast.success("Added a new user");
-          history.push(login.Type === 1 ? "/User" : "/");
         });
       }}
       validate={(values) => {
@@ -115,7 +126,7 @@ export default function UserRegistrationForm() {
             <></>
           )}
           <ReCAPTCHA
-            sitekey="6LexFawZAAAAAOq2yld-ryHi_YhTY9IVKTOiM9Ds"
+            sitekey="6LfJ6dsUAAAAAFwaXDIGHHhwiFe7oNhLBP-S66OQ"
             onChange={(value) => setCaptchaValue(value)}
           />
           <button
@@ -136,19 +147,3 @@ export default function UserRegistrationForm() {
     />
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

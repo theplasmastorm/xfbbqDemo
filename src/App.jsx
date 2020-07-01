@@ -17,7 +17,7 @@ import UserLogin from "./components/user/UserLogin";
 import UserLogout from "./components/user/UserLogout";
 
 import PageNotFound from "./PageNotFound";
-import NewOrderForm from "./components/user/NewOrderForm";
+import NewOrderForm from "./components/order/NewOrderForm";
 import NewBBQForm from "./components/bbq/NewBBQForm";
 
 export default function App() {
