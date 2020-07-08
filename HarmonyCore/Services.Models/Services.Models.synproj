@@ -21,6 +21,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppSettings.dbl" />
+    <Compile Include="AuthenticationModels.dbl" />
     <Compile Include="Bbq.dbl" />
     <Compile Include="BbqMetaData.dbl" />
     <Compile Include="DbContext.dbl" />

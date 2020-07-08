@@ -20,6 +20,8 @@ import Harmony.Core.Interface
 import Harmony.Core.Utility
 import Harmony.OData
 import Harmony.OData.Adapter
+import Microsoft.AspNetCore.Authorization
+import Microsoft.AspNetCore.Authentication.JwtBearer
 import Microsoft.AspNetCore.Builder
 import Microsoft.AspNetCore.Hosting
 import Microsoft.AspNetCore.Http
@@ -40,6 +42,7 @@ import Microsoft.Extensions.DependencyInjection.Extensions
 import Microsoft.Extensions.Logging
 import Microsoft.Extensions.Options
 import Microsoft.Extensions.Primitives
+import Microsoft.IdentityModel.Tokens
 import Microsoft.Net.Http.Headers
 import Microsoft.OData
 import Microsoft.OData.Edm
@@ -260,6 +263,35 @@ namespace Services
             &    .AddNewtonsoftJson()      ;;For PATCH
             &    .AddApplicationPart(^typeof(IsolatedMethodsBase).Assembly)
 
+            lambda configJwt(o)
+            begin
+                o.IncludeErrorDetails = true
+                o.ClaimsIssuer = AuthenticationTools.GetIssuer()
+                o.Audience = AuthenticationTools.GetAudience()
+                o.TokenValidationParameters = new TokenValidationParameters()
+                &    {
+                &    ValidateIssuer = true,
+                &    ValidIssuer = AuthenticationTools.GetIssuer(),
+                &    ValidateAudience = true,
+                &    ValidAudience = AuthenticationTools.GetAudience(),
+                &    ValidateIssuerSigningKey = true,
+                &    IssuerSigningKey = new SymmetricSecurityKey(AuthenticationTools.GetKey())
+                &    }
+            end
+
+            lambda authenticationOptions(options)
+            begin
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme
+            end
+
+            lambda authorizationOptions(options)
+            begin
+                 options.DefaultPolicy = new AuthorizationPolicyBuilder(JwtBearerDefaults.AuthenticationScheme).RequireAuthenticatedUser().Build()
+            end
+
+            services.AddAuthentication(authenticationOptions).AddJwtBearer("Bearer", configJwt)
+            mvcBuilder.AddAuthorization(authorizationOptions)
 
             ;;-------------------------------------------------------
             ;;Enable HTTP redirection to HTTPS
@@ -346,6 +378,11 @@ namespace Services
             ;;Enable HTTP redirection to HTTPS
 
             app.UseHttpsRedirection()
+
+            ;;-------------------------------------------------------
+            ;;Enable the authentication middleware
+
+            app.UseAuthentication()
 
             ;;-------------------------------------------------------
             ;;Configure the MVC & OData environments

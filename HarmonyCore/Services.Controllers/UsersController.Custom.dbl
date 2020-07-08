@@ -20,13 +20,15 @@ import System.Net.Http
 import System.Net
 import System.Collections.Specialized
 import System.Text
+import Microsoft.AspNetCore.Authorization
 
 namespace Services.Controllers
     class CaptchaReturn
         public readwrite property success, boolean
     endclass
 
-    public partial class UsersController extends ODataController
+	public partial class UsersController extends ODataController
+        {AllowAnonymous}
         {ODataRoute}
         {Produces("application/json")}
         {ProducesResponseType(^typeof(User),StatusCodes.Status200OK)}

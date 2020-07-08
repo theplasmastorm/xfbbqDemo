@@ -10,6 +10,7 @@
 ;; Any changes you make will be lost of the file is re-generated.
 ;;*****************************************************************************
 
+import Microsoft.AspNetCore.Authorization
 import Microsoft.AspNetCore.Http
 import Microsoft.OData
 import Microsoft.AspNetCore.JsonPatch
@@ -30,6 +31,7 @@ import Services.Models
 
 namespace Services.Controllers
 
+    {Authorize}
     {ApiVersion("1")}
     {ODataRoutePrefix("Orders")}
     ;;; <summary>

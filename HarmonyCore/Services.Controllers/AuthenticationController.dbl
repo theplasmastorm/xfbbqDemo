@@ -1,0 +1,68 @@
+;;*****************************************************************************
+;;
+;; Title:       AuthenticationController.dbl
+;;
+;; Description: This class defines a WebAPI controller that exposes an endpoint
+;;              that can be used to obtain a custom JSON Web Token.
+;;
+;; This code was originally code generated but will not be replaced by the code
+;; re-generation once in existence.
+;;
+;;*****************************************************************************
+
+import Microsoft.AspNetCore.Authorization
+import Microsoft.AspNetCore.Mvc
+import Newtonsoft.Json
+import Services.Models
+import System
+import System.Collections.Generic
+import System.Linq
+import System.Text
+import System.Threading.Tasks
+import Microsoft.EntityFrameworkCore
+
+namespace Services.Controllers
+
+	{Route("Authentication")}
+	public class AuthenticationController extends ControllerBase
+
+		private _DbContext, @Services.Models.DBContext
+
+		public method AuthenticationController
+			aDbContext, @Services.Models.DBContext
+			endparams
+		proc
+			this._DbContext = aDbContext
+		endmethod
+
+		{AllowAnonymous}
+		{Route("GetToken")}
+		;;; <summary>
+		;;; 
+		;;; </summary>
+		;;; <returns></returns>
+		public async method Post_GetToken, @Task<ActionResult>
+			{FromBody}
+			required in aRequest, @GetTokenRequest
+		proc
+			if (!ModelState.IsValid)
+			begin
+				mreturn BadRequest()
+			end
+
+			if (_DbContext.Users.AsNoTracking().Any(lambda (k) { k.Name.Equals(aRequest.Username) && BCrypt.Net.BCrypt.Verify(aRequest.Password, k.Hash)})) then
+			begin
+				data tokenValidHours, int, 24
+				;;To add custom claims to the JWT, add parameters to GetToken and pass values here!
+				data accessToken, string, AuthenticationTools.GetToken(aRequest.username,tokenValidHours)
+				mreturn ok(accessToken)
+			end
+			else
+			begin
+				mreturn Unauthorized()
+			end
+		endmethod
+
+	endclass
+
+endnamespace
