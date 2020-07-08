@@ -5,12 +5,59 @@ import Harmony.Core.Context
 import Harmony.Core.FileIO
 import Harmony.Core.Interface
 import Harmony.Core.Utility
-
+import Harmony.OData
+import Harmony.OData.Adapter
+import Microsoft.AspNetCore.Authorization
+import Microsoft.AspNetCore.Authentication.JwtBearer
+import Microsoft.AspNetCore.Builder
+import Microsoft.AspNetCore.Hosting
+import Microsoft.AspNetCore.Http
+import Microsoft.AspNetCore.Mvc
+import Microsoft.AspNetCore.Mvc.Abstractions
+import Microsoft.AspNetCore.Mvc.ApiExplorer
+import Microsoft.AspNetCore.StaticFiles
+import Microsoft.AspNet.OData
+import Microsoft.AspNet.OData.Extensions
+import Microsoft.AspNet.OData.Builder
+import Microsoft.AspNet.OData.Formatter
+import Microsoft.AspNet.OData.Routing
+import Microsoft.AspNet.OData.Routing.Conventions
+import Microsoft.EntityFrameworkCore
+import Microsoft.Extensions.Configuration
 import Microsoft.Extensions.DependencyInjection
+import Microsoft.Extensions.DependencyInjection.Extensions
+import Microsoft.Extensions.Logging
+import Microsoft.Extensions.Options
+import Microsoft.Extensions.Primitives
+import Microsoft.IdentityModel.Tokens
+import Microsoft.Net.Http.Headers
+import Microsoft.OData
+import Microsoft.OData.Edm
+import Microsoft.OData.UriParser
+import System.Collections.Generic
+import System.IO
+import System.Linq
+import System.Text
+import System.Threading.Tasks
+import Services.Controllers
+import Services.Models
+import Swashbuckle.AspNetCore.Swagger
+import Microsoft.OpenApi.Models
+import Microsoft.AspNetCore.SpaServices
+
 
 namespace Services
 
 	public partial class Startup
+
+		partial method ConfigureCustom, void
+			required in app, @IApplicationBuilder
+			required in env, @IHostingEnvironment
+		proc
+			app.UseRouting()
+
+			app.UseEndpoints(lambda (k) { k.MapDefaultControllerRoute() }).UseSpa(lambda (k) {})
+		endmethod
 
 		partial method ConfigureServicesCustom, void
 			services, @IServiceCollection 
