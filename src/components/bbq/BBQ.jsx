@@ -4,7 +4,13 @@ import moment from "moment";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
+import Jumbotron from "react-bootstrap/Jumbotron";
+import Table from "react-bootstrap/Table";
+import Button from "react-bootstrap/Button";
+
 export default function BBQ() {
+  document.title = "𝘹𝘧BBQ - BBQs";
+
   const [bbqs, setBbqs] = useState({ value: [] });
 
   const getBBQs = useCallback(async () => {
@@ -17,10 +23,16 @@ export default function BBQ() {
   }, [getBBQs]);
 
   return (
-    <div>
-      <table>
+    <Jumbotron>
+      <Link to="/NewBBQForm">
+        <Button variant="primary" className="float-right">
+          New BBQ
+        </Button>
+      </Link>
+      <h2>BBQs</h2>
+      <Table striped className="table-secondary">
         <thead>
-          <tr>
+          <tr className="table-primary">
             <th>BBQ ID</th>
             <th>Date Created</th>
             <th>Date Held On</th>
@@ -38,13 +50,13 @@ export default function BBQ() {
                   {moment.unix(bbq.Helddate).isAfter(moment()) ? (
                     <>
                       <Link to={{ pathname: "/NewBBQForm", state: bbq }}>
-                        <button type="button">
+                        <Button variant="primary" size="sm">
                           <span role="img" aria-label="delete">
                             📝
                           </span>
-                        </button>
-                      </Link>
-                      <button type="button">
+                        </Button>
+                      </Link>{" "}
+                      <Button variant="danger" size="sm">
                         <span
                           role="img"
                           aria-label="delete"
@@ -58,7 +70,7 @@ export default function BBQ() {
                         >
                           🗑️
                         </span>
-                      </button>
+                      </Button>
                     </>
                   ) : (
                     <i>No actions available</i>
@@ -68,7 +80,7 @@ export default function BBQ() {
             );
           })}
         </tbody>
-      </table>
-    </div>
+      </Table>
+    </Jumbotron>
   );
 }

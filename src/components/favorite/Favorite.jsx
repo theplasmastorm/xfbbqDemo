@@ -8,7 +8,13 @@ import {
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
+import Jumbotron from "react-bootstrap/Jumbotron";
+import Table from "react-bootstrap/Table";
+import Button from "react-bootstrap/Button";
+
 export default function Favorite() {
+  document.title = "𝘹𝘧BBQ - Favorites";
+
   const login = useSelector((state) => state.login);
   const [favorites, setFavorites] = useState({ value: [] });
 
@@ -25,9 +31,10 @@ export default function Favorite() {
   }, [getFavorites]);
 
   return (
-    <div>
-      <button
-        type="button"
+    <Jumbotron>
+      <Button
+        variant="danger"
+        className="float-right"
         onClick={async () => {
           await favoriteApi.deleteFavoritesByUserID(login.Id);
           getFavorites();
@@ -37,10 +44,11 @@ export default function Favorite() {
         <span role="img" aria-label="delete">
           🗑️
         </span>
-      </button>
-      <table>
+      </Button>
+      <h2>Favorites</h2>
+      <Table striped className="table-secondary">
         <thead>
-          <tr>
+          <tr className="table-primary">
             <th>Favorite ID</th>
             <th>User</th>
             <th>Order</th>
@@ -88,7 +96,7 @@ export default function Favorite() {
             );
           })}
         </tbody>
-      </table>
-    </div>
+      </Table>
+    </Jumbotron>
   );
 }

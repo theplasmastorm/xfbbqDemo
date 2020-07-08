@@ -9,6 +9,10 @@ import { loginUser } from "../../redux/actions/loginActions";
 import moment from "moment";
 import { getToken } from "../../redux/actions/tokenActions";
 
+import Jumbotron from "react-bootstrap/Jumbotron";
+import BootstrapForm from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+
 export default function UserLogin() {
   document.title = "𝘹𝘧BBQ - Login";
 
@@ -16,6 +20,8 @@ export default function UserLogin() {
   const dispatch = useDispatch();
 
   return (
+    <Jumbotron>
+      <h2>Login</h2>
       <Form
         onSubmit={async (values) => {
           const token = await tokenApi.getToken(values.Name, values.Password);
@@ -42,49 +48,70 @@ export default function UserLogin() {
         }}
         validate={(values) => {
           const errors = {};
+          const requiredMsg = (
+            <BootstrapForm.Label className="text-danger">
+              Required
+            </BootstrapForm.Label>
+          );
 
-          if (!values.Name) errors.Name = <> Required</>;
-          if (!values.Password) errors.Password = <> Required</>;
+          if (!values.Name) errors.Name = requiredMsg;
+          if (!values.Password) errors.Password = requiredMsg;
 
           return Object.keys(errors).length ? errors : undefined;
         }}
         render={({ handleSubmit, form, submitting, pristine }) => (
-          <form onSubmit={handleSubmit}>
-            <Field name="Name">
-              {({ input, meta }) => (
-                <div>
-                  <label>Name: </label>
-                  <input {...input} type="input" placeholder="Name" required />
-                  {meta.error && meta.touched && <span>{meta.error}</span>}
-                </div>
-              )}
-            </Field>
-            <Field name="Password">
-              {({ input, meta }) => (
-                <div>
-                  <label>Password: </label>
-                  <input
-                    {...input}
-                    type="password"
-                    placeholder="Password"
-                    required
-                  />
-                  {meta.error && meta.touched && <span>{meta.error}</span>}
-                </div>
-              )}
-            </Field>
-            <button type="submit" disabled={pristine || submitting}>
-              Submit
-            </button>{" "}
-            <button
-              type="button"
-              disabled={pristine || submitting}
-              onClick={form.reset}
-            >
-              Reset Form
-            </button>
-          </form>
+          <BootstrapForm onSubmit={handleSubmit}>
+            <BootstrapForm.Group>
+              <Field name="Name">
+                {({ input, meta }) => (
+                  <>
+                    <BootstrapForm.Label>Name: </BootstrapForm.Label>
+                    <BootstrapForm.Control
+                      {...input}
+                      type="input"
+                      placeholder="Name"
+                      required
+                    />
+                    {meta.error && meta.touched && <span>{meta.error}</span>}
+                  </>
+                )}
+              </Field>
+            </BootstrapForm.Group>
+            <BootstrapForm.Group>
+              <Field name="Password">
+                {({ input, meta }) => (
+                  <>
+                    <BootstrapForm.Label>Password: </BootstrapForm.Label>
+                    <BootstrapForm.Control
+                      {...input}
+                      type="password"
+                      placeholder="Password"
+                      required
+                    />
+                    {meta.error && meta.touched && <span>{meta.error}</span>}
+                  </>
+                )}
+              </Field>
+            </BootstrapForm.Group>
+            <BootstrapForm.Group>
+              <Button
+                type="submit"
+                disabled={pristine || submitting}
+                variant="primary"
+              >
+                Submit
+              </Button>{" "}
+              <Button
+                variant="secondary"
+                disabled={pristine || submitting}
+                onClick={form.reset}
+              >
+                Reset Form
+              </Button>
+            </BootstrapForm.Group>
+          </BootstrapForm>
         )}
       />
+    </Jumbotron>
   );
 }

@@ -5,7 +5,12 @@ import { useDispatch } from "react-redux";
 import { logoutUser } from "../../redux/actions/loginActions";
 import { removeToken } from "../../redux/actions/tokenActions";
 
+import Jumbotron from "react-bootstrap/Jumbotron";
+import Spinner from "react-bootstrap/Spinner";
+
 export default function UserLogout() {
+  document.title = "𝘹𝘧BBQ - Logout";
+
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -17,10 +22,14 @@ export default function UserLogout() {
   }, 2500);
 
   return (
-    <>
+    <Jumbotron>
       <center>
         <h2>Logging you out...</h2>
+        <br />
+        <Spinner animation="border" role="status">
+          <span className="sr-only">Loading...</span>
+        </Spinner>
       </center>
-    </>
+    </Jumbotron>
   );
 }

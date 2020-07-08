@@ -1,5 +1,4 @@
 import React from "react";
-import "./App.css";
 import { Route, Switch } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { useSelector } from "react-redux";
@@ -20,11 +19,14 @@ import PageNotFound from "./PageNotFound";
 import NewOrderForm from "./components/order/NewOrderForm";
 import NewBBQForm from "./components/bbq/NewBBQForm";
 
+import "bootswatch/dist/darkly/bootstrap.min.css";
+import Container from "react-bootstrap/Container";
+
 export default function App() {
   const login = useSelector((state) => state.login);
 
   return (
-    <>
+    <Container>
       <Header />
       <br />
       {login.Type <= 1 ? (
@@ -83,6 +85,6 @@ export default function App() {
         </Switch>
       )}
       <ToastContainer hideProgressBar />
-    </>
+    </Container>
   );
 }

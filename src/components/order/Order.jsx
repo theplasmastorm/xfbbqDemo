@@ -10,7 +10,14 @@ import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import _ from "lodash";
 
+import Jumbotron from "react-bootstrap/Jumbotron";
+import Table from "react-bootstrap/Table";
+import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
+
 export default function Order() {
+  document.title = "𝘹𝘧BBQ - Orders";
+
   const login = useSelector((state) => state.login);
   const [orders, setOrders] = useState([]);
 
@@ -55,10 +62,16 @@ export default function Order() {
   }
 
   return (
-    <div>
-      <table>
+    <Jumbotron>
+      <Link to="/NewOrderForm">
+        <Button variant="primary" className="float-right">
+          New Order
+        </Button>
+      </Link>
+      <h2>Orders</h2>
+      <Table striped className="table-secondary">
         <thead>
-          <tr>
+          <tr className="table-primary">
             <th>Order ID</th>
             <th>User ID</th>
             <th>BBQ ID</th>
@@ -117,8 +130,20 @@ export default function Order() {
                 <td>
                   {moment.unix(order.REL_Bbq.Helddate).isAfter(moment()) ? (
                     <>
-                      <button
-                        type="button"
+                      <Link
+                        to={{
+                          pathname: "/NewOrderForm",
+                          state: order.theirOrders,
+                        }}
+                      >
+                        <Button variant="primary" size="sm">
+                          <span role="img" aria-label="delete">
+                            📝
+                          </span>
+                        </Button>
+                      </Link>{" "}
+                      <Button
+                        variant="danger"
                         onClick={() => {
                           order.theirOrders.forEach(async (theirOrder) => {
                             await orderApi.deleteOrder(theirOrder.Id);
@@ -130,7 +155,7 @@ export default function Order() {
                         <span role="img" aria-label="delete">
                           🗑️
                         </span>
-                      </button>
+                      </Button>
                     </>
                   ) : (
                     <i>No actions available</i>
@@ -140,7 +165,7 @@ export default function Order() {
             );
           })}
         </tbody>
-      </table>
-    </div>
+      </Table>
+    </Jumbotron>
   );
 }

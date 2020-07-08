@@ -1,0 +1,102 @@
+.yellowtoggleButton input[type="checkbox"]:checked + label {
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+
+.redToggleButton input[type="checkbox"]:checked + label {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.checkboxButton input[type="checkbox"] {
+    display: none;
+}
+
+.checkboxButton input[type="checkbox"] + label::after {
+    content: " ";
+    width: 30px;
+    display: inline-block;
+}
+
+.checkboxButton input[type="checkbox"] + label::before {
+    content: " ";
+    width: 30px;
+    display: inline-block;
+}
+
+.checkboxButton input[type="checkbox"]:checked + label::before {
+    content: " \2713 ";
+}
+.btn-vertical {
+    width: 100%;
+}
+
+@media (max-width: 576px) {
+    .btn-vertical {
+        position: relative;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+        .btn-vertical > .btn,
+        .btn-group > .btn {
+            position: relative;
+            float: left;
+        }
+
+        .btn-vertical > .btn,
+        .btn-vertical > .btn-group,
+        .btn-vertical > .btn-group > .btn {
+            display: block;
+            float: none;
+            width: 100%;
+            max-width: 100%;
+        }
+
+            .btn-vertical > .btn-group > .btn {
+                float: none;
+            }
+
+            .btn-vertical > .btn + .btn,
+            .btn-vertical > .btn + .btn-group,
+            .btn-vertical > .btn-group + .btn,
+            .btn-vertical > .btn-group + .btn-group {
+                margin-top: -1px;
+                margin-left: 0;
+            }
+
+            .btn-vertical > .btn:not(:first-child):not(:last-child) {
+                border-radius: 0;
+            }
+
+            .btn-vertical > .btn:first-child:not(:last-child) {
+                border-top-right-radius: 0.25rem;
+                border-top-left-radius: 0.25rem;
+                border-bottom-right-radius: 0;
+                border-bottom-left-radius: 0;
+            }
+
+            .btn-vertical > .btn:last-child:not(:first-child) {
+                border-top-left-radius: 0;
+                border-top-right-radius: 0;
+                border-bottom-left-radius: 0.25rem;
+                border-bottom-right-radius: 0.25rem;
+            }
+
+            .btn-vertical > .btn-group:not(:first-child):not(:last-child) > .btn {
+                border-radius: 0;
+            }
+
+            .btn-vertical > .btn-group:first-child:not(:last-child) > .btn:last-child,
+            .btn-vertical > .btn-group:first-child:not(:last-child) > .dropdown-toggle {
+                border-bottom-right-radius: 0;
+                border-bottom-left-radius: 0;
+            }
+
+            .btn-vertical > .btn-group:last-child:not(:first-child) > .btn:first-child {
+                border-top-left-radius: 0;
+                border-top-right-radius: 0;
+            }
+}
+
+

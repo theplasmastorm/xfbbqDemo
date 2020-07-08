@@ -5,7 +5,13 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 
+import Jumbotron from "react-bootstrap/Jumbotron";
+import Table from "react-bootstrap/Table";
+import Button from "react-bootstrap/Button";
+
 export default function User() {
+  document.title = "𝘹𝘧BBQ - Users";
+
   const [users, setUsers] = useState({ value: [] });
   const [adminCount, setAdminCount] = useState(0);
   const login = useSelector((state) => state.login);
@@ -21,10 +27,16 @@ export default function User() {
   }, [getUsers]);
 
   return (
-    <div>
-      <table>
+    <Jumbotron>
+      <Link to="/UserRegistrationForm">
+        <Button variant="primary" className="float-right">
+          New User
+        </Button>
+      </Link>
+      <h2>Users</h2>
+      <Table striped className="table-secondary">
         <thead>
-          <tr>
+          <tr className="table-primary">
             <th>User ID</th>
             <th>Name</th>
             <th>Join Date</th>
@@ -55,17 +67,17 @@ export default function User() {
                     <Link
                       to={{ pathname: "/UserRegistrationForm", state: user }}
                     >
-                      <button type="button">
+                      <Button>
                         <span role="img" aria-label="delete">
                           📝
                         </span>
-                      </button>
-                    </Link>
+                      </Button>
+                    </Link>{" "}
                     {(adminCount <= 1 && user.Type === 1) ||
                     user.Id === login.Id ? (
                       <></>
                     ) : (
-                      <button type="button">
+                      <Button variant="danger">
                         <span
                           role="img"
                           aria-label="delete"
@@ -79,7 +91,7 @@ export default function User() {
                         >
                           🗑️
                         </span>
-                      </button>
+                      </Button>
                     )}
                   </>
                 </td>
@@ -87,7 +99,7 @@ export default function User() {
             );
           })}
         </tbody>
-      </table>
-    </div>
+      </Table>
+    </Jumbotron>
   );
 }
