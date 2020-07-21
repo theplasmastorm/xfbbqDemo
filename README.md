@@ -1,68 +1,13 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# xfBBQ Demo
+This is the project of the xfBBQ Webinar series.
 
-## Available Scripts
+The project utilizes [HarmonyCore](https://github.com/Synergex/HarmonyCore), [React](https://reactjs.org/), [React-Redux](https://react-redux.js.org/), and [Bootstrap](https://getbootstrap.com/) to create a [single page application](https://en.wikipedia.org/wiki/Single-page_application) for managing BBQs and ordering menu items for BBQs.
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## Webinar Details
+Below are the links to each recorded webinar video, what it covered, and the last commit associated with it
+Number|Topic|Link to video|Commit based on
+---:|---|:---:|:---:
+1|Creating a Harmony Core solution and hooking it up to a new React app|[Part 1](https://www.youtube.com/watch?v=AkfApG4aS0o)|[0202f0e22ca7cdb9a971023492cab2ebeb27eaec](https://github.com/theplasmastorm/xfbbqDemo/commit/0202f0e22ca7cdb9a971023492cab2ebeb27eaec)
+2|POSTing data in React and an introduction to Redux|[Part 2](https://www.youtube.com/watch?v=K1ma6TL0S_Q)|[d11fd8ace81737a5ef5ba4645ae369460e44b0a7](https://github.com/theplasmastorm/xfbbqDemo/commit/d11fd8ace81737a5ef5ba4645ae369460e44b0a7)
+3|Captchas, batch processing, and other CRUD|[Part 3](https://www.youtube.com/watch?v=qI7iGLvj8XU)|[3b90fdb0c4de67c636abd0685a685820ea448961](https://github.com/theplasmastorm/xfbbqDemo/commit/3b90fdb0c4de67c636abd0685a685820ea448961)
+4|User authentication, styling with Bootstrap, and making a React production build|[Part 4](https://www.youtube.com/watch?v=nHJb0CjkIQ0&t=2297s)|[ec0d21f39afc5e789ca2b9cc8d647fb69184236d](https://github.com/theplasmastorm/xfbbqDemo/commit/ec0d21f39afc5e789ca2b9cc8d647fb69184236d)
