@@ -9,9 +9,6 @@
     <ProjectGuid>{EBAADA64-3119-4308-A554-A005081F1CBF}</ProjectGuid>
     <Prefer32Bit>False</Prefer32Bit>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <OutputPath />
-  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Harmony.Core">
       <Version>3.1.108</Version>
@@ -103,7 +100,7 @@
       <SubType>Content</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="wwwroot\precache-manifest.aced4738b4765af000840c1805e802f8.js">
+    <Content Include="wwwroot\precache-manifest.024aaf108ab055f967fe2b300595b2bc.js">
       <SubType>Content</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -123,39 +120,39 @@
       <SubType>Content</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="wwwroot\static\css\main.6a65e7ea.chunk.css">
+    <Content Include="wwwroot\static\css\main.b8783355.chunk.css">
       <SubType>Content</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="wwwroot\static\css\main.6a65e7ea.chunk.css.map">
+    <Content Include="wwwroot\static\css\main.b8783355.chunk.css.map">
       <SubType>Content</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="wwwroot\static\js\2.f9b6a24e.chunk.js">
+    <Content Include="wwwroot\static\js\2.dfb49063.chunk.js">
       <SubType>Content</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="wwwroot\static\js\2.f9b6a24e.chunk.js.LICENSE.txt">
+    <Content Include="wwwroot\static\js\2.dfb49063.chunk.js.LICENSE.txt">
       <SubType>Content</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="wwwroot\static\js\2.f9b6a24e.chunk.js.map">
+    <Content Include="wwwroot\static\js\2.dfb49063.chunk.js.map">
       <SubType>Content</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="wwwroot\static\js\main.de6f709c.chunk.js">
+    <Content Include="wwwroot\static\js\main.0119b10a.chunk.js">
       <SubType>Content</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="wwwroot\static\js\main.de6f709c.chunk.js.map">
+    <Content Include="wwwroot\static\js\main.0119b10a.chunk.js.map">
       <SubType>Content</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="wwwroot\static\js\runtime-main.e6b6b706.js">
+    <Content Include="wwwroot\static\js\runtime-main.4c700fc2.js">
       <SubType>Content</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="wwwroot\static\js\runtime-main.e6b6b706.js.map">
+    <Content Include="wwwroot\static\js\runtime-main.4c700fc2.js.map">
       <SubType>Content</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
