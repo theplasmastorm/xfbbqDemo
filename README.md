@@ -1,6 +1,8 @@
 # xfBBQ Demo
 This is the project of the xfBBQ Webinar series. This demo is a slightly scaled down form of the [full application](https://github.com/Synergex/xfBBQ).
 
+For a high level overview of xfBBQ, see this [blog post](https://www.synergex.com/blog/2020/08/15/).
+
 A [live demo](https://xfbbq.azurewebsites.net/) of xfBBQ is also available.
 
 The project utilizes [HarmonyCore](https://github.com/Synergex/HarmonyCore), [React](https://reactjs.org/), [React-Redux](https://react-redux.js.org/), and [Bootstrap](https://getbootstrap.com/) to create a [single page application](https://en.wikipedia.org/wiki/Single-page_application) for managing BBQs and ordering menu items for BBQs.
